@@ -1,0 +1,75 @@
+mycartRoutes.post("/increment/:id/:UserId", async (req, res) => {
+    
+    try {
+      console.log(req.params.id);
+        const product = await Mycart.findOne({
+            login_id: req.params.UserId,
+            _id: req.params.id,
+
+        })
+if(product) {
+    
+    const quantity = product.quantity;
+
+    const newQuantity = quantity + 1;
+
+    const updatedInc = await Mycart.updateOne({_id:req.params.id},{ $set:{quantity:newQuantity} });
+    if (updatedInc) {
+        res.status(200).json({
+            success:true,
+            error:false,
+            message:"Quantity incremented"
+        })
+    }
+
+}
+
+        
+    } catch (error) {
+      res.status(500).json({
+        success:false,
+        error:true,
+        Errormessage:error.message
+      })
+        
+    }
+})
+
+
+
+mycartRoutes.post("/decrement/:id/:UserId", async (req, res) => {
+    
+  try {
+    console.log(req.params.id);
+      const product = await Mycart.findOne({
+          login_id: req.params.UserId,
+          _id: req.params.id,
+
+      })
+if(product) {
+  
+  const quantity = product.quantity;
+
+  const newQuantity = quantity - 1;
+
+  const updatedInc = await Mycart.updateOne({_id:req.params.id},{ $set:{quantity:newQuantity} });
+  if (updatedInc) {
+      res.status(200).json({
+          success:true,
+          error:false,
+          message:"Quantity decremented"
+      })
+  }
+
+}
+
+      
+  } catch (error) {
+    res.status(500).json({
+      success:false,
+      error:true,
+      Errormessage:error.message
+    })
+      
+  }
+})

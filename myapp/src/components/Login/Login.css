@@ -1,0 +1,16 @@
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: '100vh';
+}
+
+.paper{
+    max-width: '400';
+    width: 100%;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+}
